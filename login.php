@@ -13,8 +13,8 @@ if ($data !== null) {
     // Process the received JSON data
 
     // Extract username and password from JSON data
-    $user_name = isset($data['user_name']) ? mysqli_real_escape_string($con, $data['user_name']) : "";
-    $password = isset($data['pass']) ? $data['pass'] : "";
+    $user_name = isset($data['username']) ? mysqli_real_escape_string($con, $data['username']) : "";
+    $password = isset($data['password']) ? $data['password'] : "";
 
     // Validate input data
     if (!empty($user_name) && !empty($password)) {
@@ -31,13 +31,16 @@ if ($data !== null) {
             // Verify the password
             if (password_verify($password, $row['pass'])) {
                 // Password is correct
+                $data = array();
+                $data['id'] = $row['id'];
+                $data['name'] = $row['name'];
+                $data['email'] = $row['email'];
+                $data['username'] = $row['user_name'];
+
                 $response = array(
                     'error' => false,
                     'message' => 'Login Successful',
-                    'user_id' => $row['id'],
-                    'name' => $row['name'],
-                    'email' => $row['email'],
-                    'user_name' => $row['user_name']
+                    'user' =>  $data
                 );
             } else {
                 // Password is incorrect

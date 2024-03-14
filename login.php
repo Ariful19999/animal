@@ -22,7 +22,7 @@ if ($data !== null) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Query to check user credentials
-        $sql = "SELECT * FROM `user` ";
+        $sql = "SELECT * FROM `user` WHERE `user_name`='$user_name' AND `pass`='$password' ";
         $result = mysqli_query($con, $sql);
 
         if ($result && mysqli_num_rows($result) > 0) {

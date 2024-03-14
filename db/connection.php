@@ -1,7 +1,7 @@
 <?php
 define('HOST', 'localhost');
 define('USER', 'root');
-define('PASS', '11135984');
+define('PASS', '');
 define('DB', 'animal_db');
 
 // define('HOST', 'localhost');

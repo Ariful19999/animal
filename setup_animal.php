@@ -53,7 +53,7 @@ if (1) {
         $file_name = $_FILES['image']['name'];
 
         // Move the uploaded file to the desired location
-        $upload_directory = '/uploads/';
+        $upload_directory = 'uploads/';
         $target_path = $upload_directory . basename($file_name);
 
 

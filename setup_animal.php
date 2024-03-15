@@ -58,7 +58,7 @@ if (1) {
 
 
         if (move_uploaded_file($file_tmp, $target_path)) {
-            $image = "http://localhost/animal" . $target_path;
+            $image = "http://localhost/animal/" . $target_path;
         }
     }
 

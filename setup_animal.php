@@ -2,14 +2,14 @@
 
 include_once "http.php";
 
-header("Content-Type: application/json");
+// header("Content-Type: application/json");
 
-// Read the incoming JSON data
-$jsonData = file_get_contents('php://input');
-$data = json_decode($jsonData, true);
+// // Read the incoming JSON data
+// $jsonData = file_get_contents('php://input');
+// $_POST = json_decode($jsonData, true);
 include_once './db/connection.php';
 
-if ($data !== null) {
+if ($_POST !== null) {
     // Process the received JSON data
 
     // formData . append('petName', petName);
@@ -21,26 +21,28 @@ if ($data !== null) {
     // formData . append('gender', gender);
     // formData . append('ownerId',  ownerId);
 
-    $id = isset($data['id']) ? intval($data['id']) : 0;
-    $name = mysqli_real_escape_string($con, $data['petName']);
-    $image = mysqli_real_escape_string($con, $data['image']);
-    $age = intval($data['age']);
-    $animal_type =  mysqli_real_escape_string($con, $data['animalType']);
-    $breed = mysqli_real_escape_string($con, $data['breed']);
-    $description = mysqli_real_escape_string($con, $data['description']);
-    $gender = mysqli_real_escape_string($con, $data['gender']);
-    $owner_id = intval($data['ownerId']);
+    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    $name = mysqli_real_escape_string($con, $_POST['petName']);
+
+    // $image = mysqli_real_escape_string($con, $_POST['image']);
+
+    $age = intval($_POST['age']);
+    $animal_type =  mysqli_real_escape_string($con, $_POST['animalType']);
+    $breed = mysqli_real_escape_string($con, $_POST['breed']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    $owner_id = intval($_POST['ownerId']);
     $created_at = date("Y-m-d");
 
-    // $id = isset($data['id']) ? intval($data['id']) : 0;
-    // $name = mysqli_real_escape_string($con, $data['name']);
-    // $image = mysqli_real_escape_string($con, $data['image']);
-    // $age = intval($data['age']);
-    // $animal_type =  mysqli_real_escape_string($con, $data['animal_type']);
-    // $breed = mysqli_real_escape_string($con, $data['breed']);
-    // $description = mysqli_real_escape_string($con, $data['description']);
-    // $gender = mysqli_real_escape_string($con, $data['gender']);
-    // $owner_id = intval($data['owner_id']);
+    // $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    // $name = mysqli_real_escape_string($con, $_POST['name']);
+    // $image = mysqli_real_escape_string($con, $_POST['image']);
+    // $age = intval($_POST['age']);
+    // $animal_type =  mysqli_real_escape_string($con, $_POST['animal_type']);
+    // $breed = mysqli_real_escape_string($con, $_POST['breed']);
+    // $description = mysqli_real_escape_string($con, $_POST['description']);
+    // $gender = mysqli_real_escape_string($con, $_POST['gender']);
+    // $owner_id = intval($_POST['owner_id']);
     // $created_at = date("Y-m-d");
 
     if ($id > 0) {

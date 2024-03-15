@@ -53,12 +53,12 @@ if (1) {
         $file_name = $_FILES['image']['name'];
 
         // Move the uploaded file to the desired location
-        $upload_directory = './uploads/';
+        $upload_directory = '/uploads/';
         $target_path = $upload_directory . basename($file_name);
 
 
         if (move_uploaded_file($file_tmp, $target_path)) {
-            $image = "http://localhost/animal/" . $target_path;
+            $image = "http://localhost/animal" . $target_path;
         }
     }
 

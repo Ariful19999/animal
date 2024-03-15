@@ -43,6 +43,7 @@ if (1) {
 
         $date_r['id'] = $row['id'];
         $date_r['name'] = $row['name'];
+        $date_r['image'] = $row['image'];
         $date_r['age'] = $row['age'];
         $date_r['animal_type'] = $row['animal_type'];
         $date_r['breed'] = $row['breed'];

@@ -4,9 +4,9 @@ include_once "http.php";
 
 header("Content-Type: application/json");
 
-// Read the incoming JSON data
-$jsonData = file_get_contents('php://input');
-$data = json_decode($jsonData, true);
+// // Read the incoming JSON data
+// $jsonData = file_get_contents('php://input');
+// $data = json_decode($jsonData, true);
 include_once './db/connection.php';
 
 if (1) {
@@ -15,8 +15,8 @@ if (1) {
     // INSERT INTO `user`(`id`, `name`, `user_name`, `pass`, `email`,`created_at`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
 
     $id = 0;
-    if (isset($data['id'])) {
-        $id = (int)$data['id'];
+    if (isset($_GET['id'])) {
+        $id = (int)$_GET['id'];
     }
 
 
@@ -43,6 +43,7 @@ if (1) {
 
         $date_r['id'] = $row['id'];
         $date_r['name'] = $row['name'];
+        $date_r['image'] = $row['image'];
         $date_r['age'] = $row['age'];
         $date_r['animal_type'] = $row['animal_type'];
         $date_r['breed'] = $row['breed'];
@@ -106,4 +107,4 @@ if (1) {
 }
 
 // Send JSON response back to the client
-echo json_encode($response);
+echo json_encode($data);

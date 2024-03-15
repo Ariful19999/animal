@@ -94,8 +94,7 @@ if (1) {
 
     // Return a response
     $response = array(
-        'error' => false,
-        'data' => $data
+        $data
     );
 } else {
     // Error in decoding JSON data

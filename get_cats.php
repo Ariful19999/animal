@@ -105,4 +105,4 @@ if (1) {
 }
 
 // Send JSON response back to the client
-echo json_encode($response);
+echo json_encode($data);

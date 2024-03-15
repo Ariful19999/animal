@@ -12,16 +12,36 @@ include_once './db/connection.php';
 if ($data !== null) {
     // Process the received JSON data
 
+    // formData . append('petName', petName);
+    // formData . append('image', image);
+    // formData . append('age', age);
+    // formData . append('animalType', animalType);
+    // formData . append('breed', breed);
+    // formData . append('description', description);
+    // formData . append('gender', gender);
+    // formData . append('ownerId',  ownerId);
+
     $id = isset($data['id']) ? intval($data['id']) : 0;
-    $name = mysqli_real_escape_string($con, $data['name']);
+    $name = mysqli_real_escape_string($con, $data['petName']);
     $image = mysqli_real_escape_string($con, $data['image']);
     $age = intval($data['age']);
-    $animal_type =  mysqli_real_escape_string($con, $data['animal_type']);
+    $animal_type =  mysqli_real_escape_string($con, $data['animalType']);
     $breed = mysqli_real_escape_string($con, $data['breed']);
     $description = mysqli_real_escape_string($con, $data['description']);
     $gender = mysqli_real_escape_string($con, $data['gender']);
-    $owner_id = intval($data['owner_id']);
+    $owner_id = intval($data['ownerId']);
     $created_at = date("Y-m-d");
+
+    // $id = isset($data['id']) ? intval($data['id']) : 0;
+    // $name = mysqli_real_escape_string($con, $data['name']);
+    // $image = mysqli_real_escape_string($con, $data['image']);
+    // $age = intval($data['age']);
+    // $animal_type =  mysqli_real_escape_string($con, $data['animal_type']);
+    // $breed = mysqli_real_escape_string($con, $data['breed']);
+    // $description = mysqli_real_escape_string($con, $data['description']);
+    // $gender = mysqli_real_escape_string($con, $data['gender']);
+    // $owner_id = intval($data['owner_id']);
+    // $created_at = date("Y-m-d");
 
     if ($id > 0) {
         $sql = "UPDATE `animal` SET `name`='$name',`image`='$image',`age`='$age',`animal_type`='$animal_type',`breed`='$breed',`description`='$description',`gender`='$gender',`owner_id`='$owner_id' WHERE id='$id'";

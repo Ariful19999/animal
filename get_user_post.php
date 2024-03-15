@@ -9,24 +9,18 @@ $jsonData = file_get_contents('php://input');
 $data = json_decode($jsonData, true);
 include_once './db/connection.php';
 
-if (1) {
+if ($data !== null) {
     // Process the received JSON data
 
     // INSERT INTO `user`(`id`, `name`, `user_name`, `pass`, `email`,`created_at`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
 
     $id = 0;
-    if (isset($data['id'])) {
-        $id = (int)$data['id'];
+    if (isset($data['userid'])) {
+        $id = (int)$data['userid'];
     }
 
 
-
-
-    if ($id > 0) {
-        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal` WHERE id=$id";
-    } else {
-        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal`";
-    }
+    $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal` WHERE owner_id=$id";
 
 
 

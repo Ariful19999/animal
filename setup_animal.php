@@ -9,7 +9,7 @@ include_once "http.php";
 // $_POST = json_decode($jsonData, true);
 include_once './db/connection.php';
 
-if ($_POST !== null) {
+if (1) {
     // Process the received JSON data
 
     // formData . append('petName', petName);
@@ -34,6 +34,8 @@ if ($_POST !== null) {
     $owner_id = intval($_POST['ownerId']);
     $created_at = date("Y-m-d");
 
+    $image = "";
+
     // $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
     // $name = mysqli_real_escape_string($con, $_POST['name']);
     // $image = mysqli_real_escape_string($con, $_POST['image']);
@@ -44,6 +46,21 @@ if ($_POST !== null) {
     // $gender = mysqli_real_escape_string($con, $_POST['gender']);
     // $owner_id = intval($_POST['owner_id']);
     // $created_at = date("Y-m-d");
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // File was successfully uploaded
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $file_name = $_FILES['image']['name'];
+
+        // Move the uploaded file to the desired location
+        $upload_directory = './uploads/';
+        $target_path = $upload_directory . basename($file_name);
+
+
+        if (move_uploaded_file($file_tmp, $target_path)) {
+            $image = "http://localhost/animal/" . $target_path;
+        }
+    }
 
     if ($id > 0) {
         $sql = "UPDATE `animal` SET `name`='$name',`image`='$image',`age`='$age',`animal_type`='$animal_type',`breed`='$breed',`description`='$description',`gender`='$gender',`owner_id`='$owner_id' WHERE id='$id'";

@@ -2,7 +2,7 @@
 
 include_once "http.php";
 
-header("Content-Type: application/json");
+//header("Content-Type: application/json");
 
 // // Read the incoming JSON data
 // $jsonData = file_get_contents('php://input');
@@ -57,32 +57,38 @@ if (1) {
         $sql_in = "SELECT * FROM `comment` WHERE comment.id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
-        $date_c = array();
+        $date_cc = array();
 
         while ($row_in = mysqli_fetch_assoc($res_in)) {
+
+            $date_c = array();
             $date_c['id'] = $row_in['id'];
             $date_c['text'] = $row_in['text'];
             $date_c['updated_at'] = $row_in['updated_at'];
             $date_c['created_at'] = $row_in['created_at'];
             $date_c['post'] = $row_in['animal_id'];
             $date_c['user'] = $row_in['user_id'];
-        }
-        $date_r['comments'] = $date_c;
 
+            $date_cc[] = $date_c;
+        }
+        $date_r['comments'] = $date_cc;
 
 
         $sql_in = "SELECT * FROM `likes` WHERE likes.id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
-        $date_l = array();
-
+        $date_ll = array();
 
         while ($row_in = mysqli_fetch_assoc($res_in)) {
+            $date_l = array();
             $date_l['id'] = $row_in['id'];
             $date_l['user'] = $row_in['user_id'];
             $date_l['post'] = $row_in['animal_id'];
+
+            $date_ll[] = $date_l;
         }
-        $date_r['likes'] = $date_l;
+        $date_r['likes'] = $date_ll;
+
 
         $data[] = $date_r;
     }

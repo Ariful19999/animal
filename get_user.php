@@ -74,7 +74,7 @@ if (1) {
 
 
 
-        $sql_in = " SELECT DISTINCT likes.animal_id, * FROM `likes` WHERE likes.user_id=$id";
+        $sql_in = "SELECT DISTINCT likes.animal_id, user_id,id FROM `likes` WHERE likes.user_id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
         $date_ll = array();

@@ -49,15 +49,33 @@ if (1) {
 
     $image = "";
 
+    // if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    //     // File was successfully uploaded
+    //     $file_tmp = $_FILES['image']['tmp_name'];
+    //     $file_name = $_FILES['image']['name'];
+
+    //     // Move the uploaded file to the desired location
+    //     $upload_directory = 'uploads/';
+    //     $target_path = $upload_directory . basename($file_name);
+
+
+    //     if (move_uploaded_file($file_tmp, $target_path)) {
+    //         $image = "http://localhost/animal/" . $target_path;
+    //     }
+    // }
+
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         // File was successfully uploaded
         $file_tmp = $_FILES['image']['tmp_name'];
         $file_name = $_FILES['image']['name'];
+        $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
 
-        // Move the uploaded file to the desired location
+        // Generate new file name using md5 hash of current timestamp and add the original file extension
+        $new_file_name = md5(time()) . '.' . $file_extension;
+
+        // Move the uploaded file to the desired location with the new file name
         $upload_directory = 'uploads/';
-        $target_path = $upload_directory . basename($file_name);
-
+        $target_path = $upload_directory . $new_file_name;
 
         if (move_uploaded_file($file_tmp, $target_path)) {
             $image = "http://localhost/animal/" . $target_path;

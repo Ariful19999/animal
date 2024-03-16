@@ -18,7 +18,7 @@ if ($data !== null) {
     $status = isset($data['status']) ? intval($data['status']) : 1;
 
     if ($id > 0) {
-        $sql = "UPDATE `likes` SET `user_id`='$user_id', `animal_id`='$animal_id', `status`='$status' WHERE id='$id'";
+        $sql = "UPDATE `likes` SET `user_id`='$user_id', `animal_id`='$animal_id', `status`='$status' WHERE id=$id";
         $message = "Updated Successfully";
     } else {
         $sql = "INSERT INTO `likes` (`user_id`, `animal_id`, `status`) VALUES ('$user_id', '$animal_id', '$status')";

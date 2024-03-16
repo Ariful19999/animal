@@ -8,6 +8,7 @@ include_once "http.php";
 // $jsonData = file_get_contents('php://input');
 // $data = json_decode($jsonData, true);
 include_once './db/connection.php';
+$isId = 0;
 
 if (1) {
     // Process the received JSON data
@@ -20,12 +21,11 @@ if (1) {
     }
 
 
-
-
     if ($id > 0) {
         $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal` WHERE animal.owner_id=$id";
+        $isId = 1;
     } else {
-        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal`";
+        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal` WHERE animal.owner_id=$id";
     }
 
 
@@ -110,4 +110,12 @@ if (1) {
 }
 
 // Send JSON response back to the client
-echo json_encode($data);
+if ($isId == 1) {
+    echo json_encode($data);
+} else {
+    $response = array(
+        'error' => true,
+        'message' => 'User Id Required'
+    );
+    echo json_encode($response);
+}

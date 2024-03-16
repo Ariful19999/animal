@@ -13,8 +13,8 @@ if ($data !== null) {
     // Process the received JSON data
 
     $id = isset($data['id']) ? intval($data['id']) : 0;
-    $user_id = mysqli_real_escape_string($con, $data['user_id']);
-    $animal_id = mysqli_real_escape_string($con, $data['animal_id']);
+    $user_id = mysqli_real_escape_string($con, $data['user']);
+    $animal_id = mysqli_real_escape_string($con, $data['post']);
     $status = isset($data['status']) ? intval($data['status']) : 1;
 
     if ($id > 0) {

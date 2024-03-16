@@ -13,7 +13,7 @@ if (1) {
     // Process the received JSON data
 
     // Extract necessary data from JSON
-    $text = mysqli_real_escape_string($con, $_POST['text']);
+
     $user_id = intval($_POST['user']);
     $animal_id = intval($_POST['post']);
 
@@ -21,12 +21,12 @@ if (1) {
     $current_timestamp = date("Y-m-d H:i:s");
 
     // Prepare and execute the SQL query
-    $sql = "INSERT INTO `comment` (`text`, `updated_at`, `created_at`, `user_id`, `animal_id`) VALUES ('$text', '$current_timestamp', '$current_timestamp', $user_id, $animal_id)";
+    $sql = "INSERT INTO `likes`(`user_id`, `animal_id`, `status`) VALUES ($user_id,$animal_id,1)";
 
     if (mysqli_query($con, $sql)) {
         $response = array(
             'error' => false,
-            'message' => 'Comment added successfully'
+            'message' => 'Likes added successfully'
         );
     } else {
         // Error in executing the query

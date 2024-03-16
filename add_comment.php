@@ -2,20 +2,20 @@
 
 include_once "http.php";
 
-// header("Content-Type: application/json");
+header("Content-Type: application/json");
 
-// // Read the incoming JSON data
-// $jsonData = file_get_contents('php://input');
-//$_POST = json_decode($jsonData, true);
+// Read the incoming JSON data
+$jsonData = file_get_contents('php://input');
+$data = json_decode($jsonData, true);
 include_once './db/connection.php';
 
 if (1) {
     // Process the received JSON data
 
     // Extract necessary data from JSON
-    $text = mysqli_real_escape_string($con, $_POST['text']);
-    $user_id = intval($_POST['user']);
-    $animal_id = intval($_POST['post']);
+    $text = mysqli_real_escape_string($con, $data['text']);
+    $user_id = intval($data['user']);
+    $animal_id = intval($data['post']);
 
     // Get current timestamp
     $current_timestamp = date("Y-m-d H:i:s");

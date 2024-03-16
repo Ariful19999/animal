@@ -54,7 +54,7 @@ if (1) {
 
         $id = (int)$row['id'];
 
-        $sql_in = "SELECT * FROM `comment` WHERE comment.id=$id";
+        $sql_in = "SELECT * FROM `comment` WHERE comment.animal_id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
         $date_cc = array();
@@ -74,7 +74,7 @@ if (1) {
         $date_r['comments'] = $date_cc;
 
 
-        $sql_in = "SELECT * FROM `likes` WHERE likes.id=$id";
+        $sql_in = "SELECT * FROM `likes` WHERE likes.animal_id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
         $date_ll = array();

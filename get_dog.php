@@ -2,11 +2,11 @@
 
 include_once "http.php";
 
-header("Content-Type: application/json");
+// header("Content-Type: application/json");
 
-// Read the incoming JSON data
-$jsonData = file_get_contents('php://input');
-$data = json_decode($jsonData, true);
+// // Read the incoming JSON data
+// $jsonData = file_get_contents('php://input');
+// $data = json_decode($jsonData, true);
 include_once './db/connection.php';
 
 if (1) {
@@ -15,8 +15,8 @@ if (1) {
     // INSERT INTO `user`(`id`, `name`, `user_name`, `pass`, `email`,`created_at`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
 
     $id = 0;
-    if (isset($data['id'])) {
-        $id = (int)$data['id'];
+    if (isset($_GET['id'])) {
+        $id = (int)$_GET['id'];
     }
 
 
@@ -41,7 +41,7 @@ if (1) {
 
         $date_r = array();
 
-        $date_r['id'] = $row['id'];
+        $date_r['id'] = (int)$row['id'];
         $date_r['name'] = $row['name'];
         $date_r['image'] = $row['image'];
         $date_r['age'] = $row['age'];
@@ -54,7 +54,7 @@ if (1) {
 
         $id = (int)$row['id'];
 
-        $sql_in = "SELECT * FROM `comment` WHERE comment.id=$id";
+        $sql_in = "SELECT * FROM `comment` WHERE comment.animal_id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
         $date_cc = array();
@@ -75,7 +75,7 @@ if (1) {
 
 
 
-        $sql_in = "SELECT * FROM `likes` WHERE likes.id=$id";
+        $sql_in = "SELECT * FROM `likes` WHERE likes.animal_id=$id";
         $res_in = mysqli_query($con, $sql_in);
 
         $date_ll = array();

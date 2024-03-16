@@ -47,6 +47,8 @@ if (1) {
     // $owner_id = intval($_POST['owner_id']);
     // $created_at = date("Y-m-d");
 
+    $image = "";
+
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         // File was successfully uploaded
         $file_tmp = $_FILES['image']['tmp_name'];
@@ -63,7 +65,13 @@ if (1) {
     }
 
     if ($id > 0) {
-        $sql = "UPDATE `animal` SET `name`='$name',`image`='$image',`age`='$age',`animal_type`='$animal_type',`breed`='$breed',`description`='$description',`gender`='$gender',`owner_id`='$owner_id' WHERE id='$id'";
+
+        if (strlen($image) > 1) {
+            $sql = "UPDATE `animal` SET `name`='$name',`image`='$image',`age`='$age',`animal_type`='$animal_type',`breed`='$breed',`description`='$description',`gender`='$gender',`owner_id`='$owner_id' WHERE id=$id";
+        } else {
+            $sql = "UPDATE `animal` SET `name`='$name',`age`='$age',`animal_type`='$animal_type',`breed`='$breed',`description`='$description',`gender`='$gender',`owner_id`='$owner_id' WHERE id=$id";
+        }
+
         $message = "Animal " . $name . " Updated Successfully";
     } else {
         $sql = "INSERT INTO `animal`(`name`, `image`, `age`, `animal_type`, `breed`, `description`, `gender`, `owner_id`, `created_at`) VALUES ('$name','$image','$age','$animal_type','$breed','$description','$gender','$owner_id','$created_at')";

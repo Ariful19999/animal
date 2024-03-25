@@ -23,9 +23,9 @@ if (1) {
 
 
     if ($id > 0) {
-        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal` WHERE id=$id";
+        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,animal.status,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal` WHERE id=$id";
     } else {
-        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal`";
+        $sql = "SELECT animal.id,animal.name,animal.image,animal.age,animal.status,(SELECT animal_category.cat_name  FROM `animal_category` WHERE animal_category.id=animal.animal_type) AS animal_type,animal.breed,animal.description,(SELECT gender.type FROM `gender` WHERE gender.id=animal.gender) as gender,animal.owner_id,animal.created_at FROM `animal`";
     }
 
 
@@ -51,6 +51,7 @@ if (1) {
         $date_r['gender'] = $row['gender'];
         $date_r['owner_id'] = $row['owner_id'];
         $date_r['created_at'] = $row['created_at'];
+        $date_r['status'] = $row['status'];
 
         $id = (int)$row['id'];
 
